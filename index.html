@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>非遗数创跨境交易平台 | Intangible Cultural Heritage Digital Trading Platform</title>
+    <style>
+        /* 全局重置与基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Inter", "Microsoft YaHei", sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        /* 国际化主题色：深蓝+白色+浅灰 */
+        :root {
+            --primary-dark: #0a3d62;
+            --primary-light: #2d5c8a;
+            --primary-hover: #1e6bb8;
+            --white: #ffffff;
+            --gray-light: #f8f9fa;
+            --gray-medium: #e9ecef;
+            --text-dark: #212529;
+            --text-gray: #6c757d;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+        }
+
+        body {
+            background-color: var(--gray-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* 容器限制 - 国际化布局 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 导航栏 - 国际化风格 */
+        nav {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 16px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 999;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-en {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 15px;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--white);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* 语言切换按钮 */
+        .lang-switch {
+            display: flex;
+            gap: 8px;
+        }
+
+        .lang-btn {
+            padding: 6px 14px;
+            border-radius: var(--radius-sm);
+            border: 1px solid transparent;
+            background-color: rgba(255,255,255,0.15);
+            color: var(--white);
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .lang-btn.active {
+            background-color: var(--white);
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        .lang-btn:hover {
+            background-color: rgba(255,255,255,0.25);
+        }
+
+        /* 头部横幅 - 国际化视觉 */
+        .banner {
+            margin-top: 72px;
+            height: 550px;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .banner::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("https://s41.ax1x.com/2026/03/16/peVW91g.md.jpg ") center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            max-width: 650px;
+            padding: 0 0 0 8%;
+        }
+
+        .banner h1 {
+            font-size: 48px;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .banner p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 32px;
+            opacity: 0.95;
+        }
+
+        .btn-primary {
+            background-color: var(--white);
+            color: var(--primary-dark);
+            padding: 14px 36px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            display: inline-block;
+            box-shadow: var(--shadow-sm);
+            border: 2px solid var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--white);
+        }
+
+        /* 板块通用样式 */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            color: var(--primary-dark);
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            color: var(--text-gray);
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* 平台介绍 */
+        .about {
+            background-color: var(--white);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 17px;
+            line-height: 1.9;
+            color: var(--text-dark);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+        }
+
+        .about-img {
+            width: 100%;
+            height: 400px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 核心优势 */
+        .features {
+            background-color: var(--gray-light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            padding: 32px 24px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(10, 61, 98, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary-dark);
+            font-size: 28px;
+        }
+
+        .feature-card h3 {
+            color: var(--primary-dark);
+            font-size: 18px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--text-gray);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* 商品展示 - 国际化升级 */
+        .products {
+            background-color: var(--white);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.4s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            cursor: pointer; /* 鼠标悬停显示手型 */
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 24px;
+        }
+
+        .product-tag-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .product-tag {
+            background-color: rgba(10, 61, 98, 0.1);
+            color: var(--primary-dark);
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+        }
+
+        .product-price {
+            color: #d32f2f;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .product-title {
+            font-size: 17px;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .product-desc {
+            font-size: 13px;
+            color: var(--text-gray);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .product-region {
+            font-size: 12px;
+            color: var(--primary-light);
+            font-weight: 500;
+        }
+
+        /* 团队介绍 */
+        .team {
+            background-color: var(--gray-light);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 24px;
+        }
+
+        .team-card {
+            text-align: center;
+            background-color: var(--white);
+            padding: 24px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 32px;
+        }
+
+        .team-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .team-role {
+            font-size: 13px;
+            color: var(--text-gray);
+        }
+
+        /* 页脚 - 国际化样式 */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-desc {
+            font-size: 14px;
+            line-height: 1.8;
+            opacity: 0.8;
+            max-width: 400px;
+        }
+
+        .footer-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 992px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .team-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .banner h1 {
+                font-size: 36px;
+            }
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            .banner {
+                height: 450px;
+            }
+            .banner h1 {
+                font-size: 28px;
+            }
+            .section {
+                padding: 60px 0;
+            }
+        }
+
+        /* 隐藏元素样式 */
+        .hide {
+            display: none !important;
+        }
+
+        /* 完善中页面样式 */
+        .under-construction {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--gray-light);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .construction-icon {
+            font-size: 80px;
+            color: var(--primary-dark);
+            margin-bottom: 30px;
+        }
+
+        .construction-title {
+            font-size: 36px;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .construction-desc {
+            font-size: 18px;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .back-btn {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            background-color: var(--primary-hover);
+        }
+    </style>
+    <!-- 引入Inter字体（国际化通用字体） -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <!-- 引入图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <script>
+        // 保存主页面URL（解决新窗口打开后无法返回的问题）
+        if (!localStorage.getItem('mainPageUrl')) {
+            localStorage.setItem('mainPageUrl', window.location.href.split('?')[0]);
+        }
+
+        // 获取URL参数，判断是否打开完善中页面
+        const urlParams = new URLSearchParams(window.location.search);
+        const isUnderConstruction = urlParams.get('construction') === 'true';
+        
+        if (isUnderConstruction) {
+            // 完善中页面内容
+            document.write(`
+                <div class="under-construction">
+                    <div class="construction-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h1 class="construction-title cn">该功能模块正在完善中</h1>
+                    <h1 class="construction-title en hide">This feature module is under construction</h1>
+                    <p class="construction-desc cn">我们正在全力开发商品详情功能，敬请期待！</p>
+                    <p class="construction-desc en hide">We are fully developing the product detail function, please stay tuned!</p>
+                    <button id="backToMainBtn" class="back-btn cn">返回商品展示页</button>
+                    <button id="backToMainBtn" class="back-btn en hide">Back to Product Display Page</button>
+                </div>
+            `);
+        } else {
+            // 主页面内容
+            document.write(`
+                <!-- 导航栏 -->
+                <nav>
+                    <div class="container nav-container">
+                        <div class="logo">
+                            <span class="cn">非遗数创·跨境通途</span>
+                            <span class="en hide">ICH Digital · Global Access</span>
+                        </div>
+                        <div class="nav-content">
+                            <div class="nav-links">
+                                <a href="#home" class="cn">首页</a>
+                                <a href="#home" class="en hide">Home</a>
+                                <a href="#about" class="cn">平台介绍</a>
+                                <a href="#about" class="en hide">About</a>
+                                <a href="#features" class="cn">核心优势</a>
+                                <a href="#features" class="en hide">Advantages</a>
+                                <a href="#products" class="cn">商品展示</a>
+                                <a href="#products" class="en hide">Products</a>
+                                <a href="#team" class="cn">团队介绍</a>
+                                <a href="#team" class="en hide">Team</a>
+                            </div>
+                            <!-- 语言切换按钮 -->
+                            <div class="lang-switch">
+                                <button class="lang-btn active" id="cnBtn">中</button>
+                                <button class="lang-btn" id="enBtn">EN</button>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- 头部横幅 -->
+                <section class="banner" id="home">
+                    <div class="banner-content">
+                        <h1 class="cn">AI赋能全球非遗设计<br>跨境交易与数字资产平台</h1>
+                        <h1 class="en hide">AI Empowers Global ICH Design<br>Cross-border Trading & Digital Asset Platform</h1>
+                        <p class="cn">以区块链确权 + AI生成设计 + 全链路跨境服务，让中国非遗走向世界，让文化价值转化为商业价值。</p>
+                        <p class="en hide">With blockchain rights confirmation + AI-generated design + full-link cross-border services, we bring Chinese intangible cultural heritage to the world and transform cultural value into commercial value.</p>
+                        <a href="#products" class="btn-primary cn">查看非遗设计商品</a>
+                        <a href="#products" class="btn-primary en hide">View ICH Design Products</a>
+                    </div>
+                </section>
+
+                <!-- 平台介绍 -->
+                <section class="section about" id="about">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2 class="section-title cn">平台介绍</h2>
+                            <h2 class="section-title en hide">Platform Introduction</h2>
+                            <p class="section-subtitle cn">连接全球非遗资源，打造数字化跨境交易新生态</p>
+                            <p class="section-subtitle en hide">Connect global ICH resources and create a new digital cross-border trading ecosystem</p>
+                        </div>
+                        <div class="about-content">
+                            <div class="about-text">
+                                <p class="cn">非遗数创·跨境通途是面向全球的非遗设计跨境交易平台，专注于将中国1557项国家级非遗转化为可商用、可溯源、可交易的数字设计资产。</p>
+                                <p class="en hide">ICH Digital · Global Access is a global cross-border trading platform for ICH design, focusing on transforming China's 1557 national-level intangible cultural heritage items into commercial, traceable, and tradable digital design assets.</p>
+                                <p class="cn">平台采用「AI+区块链」双轮驱动，为非遗传承人提供数字化工具、版权存证与跨境变现通道；为全球品牌提供合规、正版、高文化价值的非遗设计素材与授权服务，重点覆盖东南亚、中东等高增长市场。</p>
+                                <p class="en hide">Driven by "AI + blockchain", the platform provides digital tools, copyright deposit, and cross-border monetization channels for ICH inheritors; it offers compliant, genuine, and high cultural value ICH design materials and authorization services for global brands, focusing on high-growth markets such as Southeast Asia and the Middle East.</p>
+                            </div>
+                            <div class="about-img">
+                                <img src="https://s41.ax1x.com/2026/03/16/peVWWvQ.md.jpg" alt="平台介绍">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 核心优势 -->
+                <section class="section features" id="features">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2 class="section-title cn">核心优势</h2>
+                            <h2 class="section-title en hide">Core Advantages</h2>
+                            <p class="section-subtitle cn">四大核心能力，构建非遗数字化跨境交易闭环</p>
+                            <p class="section-subtitle en hide">Four core capabilities to build a closed loop for digital cross-border trading of ICH</p>
+                        </div>
+                        <div class="features-grid">
+                            <!-- 优势1 -->
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <h3 class="cn">AI非遗纹样生成</h3>
+                                <h3 class="en hide">AI ICH Pattern Generation</h3>
+                                <p class="cn">基于扩散模型训练，一键生成刺绣、剪纸、陶瓷等高精度非遗纹样，效率提升3倍以上。</p>
+                                <p class="en hide">Trained on diffusion models, generate high-precision ICH patterns such as embroidery, paper-cutting, and ceramics with one click, improving efficiency by over 300%.</p>
+                            </div>
+                            <!-- 优势2 -->
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-link"></i>
+                                </div>
+                                <h3 class="cn">区块链数字护照</h3>
+                                <h3 class="en hide">Blockchain Digital Passport</h3>
+                                <p class="cn">双认证一护照体系，实现文化溯源、版权存证、跨境授权全流程可验可信。</p>
+                                <p class="en hide">Dual-certification and one-passport system, realizing verifiable and trustworthy whole-process cultural traceability, copyright deposit, and cross-border authorization.</p>
+                            </div>
+                            <!-- 优势3 -->
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-globe-asia"></i>
+                                </div>
+                                <h3 class="cn">全链路跨境服务</h3>
+                                <h3 class="en hide">Full-Link Cross-border Services</h3>
+                                <p class="cn">支付、物流、清关、多语言翻译一站式完成，降低非遗出海门槛。</p>
+                                <p class="en hide">One-stop payment, logistics, customs clearance, and multilingual translation services, lowering the threshold for ICH to go global.</p>
+                            </div>
+                            <!-- 优势4 -->
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h3 class="cn">全球市场覆盖</h3>
+                                <h3 class="en hide">Global Market Coverage</h3>
+                                <p class="cn">聚焦东南亚、中东蓝海市场，对接海量海外品牌与采购商资源。</p>
+                                <p class="en hide">Focus on blue ocean markets in Southeast Asia and the Middle East, connecting with massive overseas brand and buyer resources.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 商品展示 -->
+                <section class="section products" id="products">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2 class="section-title cn">非遗设计商品展示</h2>
+                            <h2 class="section-title en hide">ICH Design Products</h2>
+                            <p class="section-subtitle cn">精选优质非遗数字设计资产，支持全球跨境商用授权</p>
+                            <p class="section-subtitle en hide">Selected high-quality ICH digital design assets, supporting global cross-border commercial authorization</p>
+                        </div>
+                        <div class="products-grid">
+                            <!-- 商品1 -->
+                            <div class="product-card">
+                                <div class="product-img" onclick="openConstructionPage()">
+                                    <img src="https://s41.ax1x.com/2026/03/16/peVRO0I.md.jpg" alt="苗绣纹样">
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-tag-price">
+                                        <span class="product-tag cn">苗绣 · 数字授权</span>
+                                        <span class="product-tag en hide">Miao Embroidery · Digital License</span>
+                                        <span class="product-price">¥299</span>
+                                    </div>
+                                    <h3 class="product-title cn">传统苗绣吉祥纹样AI设计</h3>
+                                    <h3 class="product-title en hide">AI Design of Traditional Miao Embroidery Auspicious Patterns</h3>
+                                    <p class="product-desc cn">高清PNG｜可商用｜跨境授权｜区块链存证</p>
+                                    <p class="product-desc en hide">HD PNG | Commercial Use | Cross-border License | Blockchain Deposit</p>
+                                    <div class="product-region cn">支持：东南亚 / 中东市场</div>
+                                    <div class="product-region en hide">Supported: Southeast Asia / Middle East Markets</div>
+                                </div>
+                            </div>
+                            <!-- 商品2 -->
+                            <div class="product-card">
+                                <div class="product-img" onclick="openConstructionPage()">
+                                    <img src="https://s41.ax1x.com/2026/03/16/peVWU3D.jpg" alt="剪纸艺术">
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-tag-price">
+                                        <span class="product-tag cn">剪纸 · 商用素材</span>
+                                        <span class="product-tag en hide">Paper Cutting · Commercial Material</span>
+                                        <span class="product-price">¥199</span>
+                                    </div>
+                                    <h3 class="product-title cn">中国风剪纸纹样设计包</h3>
+                                    <h3 class="product-title en hide">Chinese Style Paper Cutting Pattern Design Package</h3>
+                                    <p class="product-desc cn">10款纹样｜矢量文件｜跨境可用</p>
+                                    <p class="product-desc en hide">10 Patterns | Vector Files | Cross-border Available</p>
+                                    <div class="product-region cn">支持：东南亚 / 中东市场</div>
+                                    <div class="product-region en hide">Supported: Southeast Asia / Middle East Markets</div>
+                                </div>
+                            </div>
+                            <!-- 商品3 -->
+                            <div class="product-card">
+                                <div class="product-img" onclick="openConstructionPage()">
+                                    <img src="https://s41.ax1x.com/2026/03/16/peVWJN6.md.jpg" alt="青花瓷纹样">
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-tag-price">
+                                        <span class="product-tag cn">青花瓷 · 纹理素材</span>
+                                        <span class="product-tag en hide">Blue and White Porcelain · Texture Material</span>
+                                        <span class="product-price">¥269</span>
+                                    </div>
+                                    <h3 class="product-title cn">青花瓷传统纹理高清设计</h3>
+                                    <h3 class="product-title en hide">HD Design of Traditional Blue and White Porcelain Texture</h3>
+                                    <p class="product-desc cn">4K高清｜可印刷｜跨境授权</p>
+                                    <p class="product-desc en hide">4K HD | Printable | Cross-border License</p>
+                                    <div class="product-region cn">支持：东南亚 / 中东市场</div>
+                                    <div class="product-region en hide">Supported: Southeast Asia / Middle East Markets</div>
+                                </div>
+                            </div>
+                            <!-- 商品4 -->
+                            <div class="product-card">
+                                <div class="product-img" onclick="openConstructionPage()">
+                                    <img src="https://s41.ax1x.com/2026/03/16/peVWY4K.md.jpg" alt="蜀锦纹样">
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-tag-price">
+                                        <span class="product-tag cn">蜀锦 · 数字版权</span>
+                                        <span class="product-tag en hide">Shu Brocade · Digital Copyright</span>
+                                        <span class="product-price">¥329</span>
+                                    </div>
+                                    <h3 class="product-title cn">蜀锦传统织锦图案设计合集</h3>
+                                    <h3 class="product-title en hide">Collection of Traditional Shu Brocade Pattern Designs</h3>
+                                    <p class="product-desc cn">非遗认证｜独家授权｜全球可用</p>
+                                    <p class="product-desc en hide">ICH Certified | Exclusive License | Globally Available</p>
+                                    <div class="product-region cn">支持：东南亚 / 中东市场</div>
+                                    <div class="product-region en hide">Supported: Southeast Asia / Middle East Markets</div>
+                                </div>
+                            </div>
+                            <!-- 商品5 -->
+                            <div class="product-card">
+                                <div class="product-img" onclick="openConstructionPage()">
+                                    <img src="https://s41.ax1x.com/2026/03/16/peVWN9O.md.jpg" alt="敦煌纹样">
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-tag-price">
+                                        <span class="product-tag cn">敦煌 · 文创设计</span>
+                                        <span class="product-tag en hide">Dunhuang · Cultural and Creative Design</span>
+                                        <span class="product-price">¥289</span>
+                                    </div>
+                                    <h3 class="product-title cn">敦煌藻井经典纹样素材</h3>
+                                    <h3 class="product-title en hide">Classic Pattern Materials of Dunhuang Caisson</h3>
+                                    <p class="product-desc cn">文化溯源｜AI生成｜跨境商用</p>
+                                    <p class="product-desc en hide">Cultural Traceability | AI Generated | Cross-border Commercial Use</p>
+                                    <div class="product-region cn">支持：东南亚 / 中东市场</div>
+                                    <div class="product-region en hide">Supported: Southeast Asia / Middle East Markets</div>
+                                </div>
+                            </div>
+                            <!-- 商品6 -->
+                            <div class="product-card">
+                                <div class="product-img" onclick="openConstructionPage()">
+                                    <img src="https://s41.ax1x.com/2026/03/16/peVfSV1.md.jpg" alt="民俗纹样">
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-tag-price">
+                                        <span class="product-tag cn">民俗 · 跨境商用</span>
+                                        <span class="product-tag en hide">Folk Custom · Cross-border Commercial Use</span>
+                                        <span class="product-price">¥239</span>
+                                    </div>
+                                    <h3 class="product-title cn">青铜饕餮纹经典纹样素材</h3>
+                                    <h3 class="product-title en hide">Classic Bronze Taotie Pattern Assets</h3>
+                                    <p class="product-desc cn">多格式文件｜品牌可用｜全球授权</p>
+                                    <p class="product-desc en hide">Multi-format Files | Brand Usable | Global License</p>
+                                    <div class="product-region cn">支持：东南亚 / 中东市场</div>
+                                    <div class="product-region en hide">Supported: Southeast Asia / Middle East Markets</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 团队介绍 -->
+                <section class="section team" id="team">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2 class="section-title cn">核心团队</h2>
+                            <h2 class="section-title en hide">Core Team</h2>
+                            <p class="section-subtitle cn">专业的跨境电商与非遗数字化团队</p>
+                            <p class="section-subtitle en hide">Professional Cross-border E-commerce and ICH Digitalization Team</p>
+                        </div>
+                        <div class="team-grid">
+                            <!-- 团队1 -->
+                            <div class="team-card">
+                                <div class="team-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <h3 class="team-name cn">肖曦滢</h3>
+                                <h3 class="team-name en hide">Xiao Xiying</h3>
+                                <p class="team-role cn">项目负责人 | 电商专业</p>
+                                <p class="team-role en hide">Project Lead | E-commerce Major</p>
+                            </div>
+                            <!-- 团队2 -->
+                            <div class="team-card">
+                                <div class="team-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <h3 class="team-name cn">李亚桥</h3>
+                                <h3 class="team-name en hide">Li Yaqiao</h3>
+                                <p class="team-role cn">跨境合规 | 国贸专业</p>
+                                <p class="team-role en hide">Cross-border Compliance | International Trade Major</p>
+                            </div>
+                            <!-- 团队3 -->
+                            <div class="team-card">
+                                <div class="team-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <h3 class="team-name cn">王启航</h3>
+                                <h3 class="team-name en hide">Wang Qihang</h3>
+                                <p class="team-role cn">技术开发 | 计算机专业</p>
+                                <p class="team-role en hide">Technical Development | Computer Science Major</p>
+                            </div>
+                            <!-- 团队4 -->
+                            <div class="team-card">
+                                <div class="team-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <h3 class="team-name cn">李烜坤</h3>
+                                <h3 class="team-name en hide">Li Xuankun</h3>
+                                <p class="team-role cn">跨文化沟通 | 英语专业</p>
+                                <p class="team-role en hide">Cross-cultural Communication | English Major</p>
+                            </div>
+                            <!-- 团队5 -->
+                            <div class="team-card">
+                                <div class="team-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <h3 class="team-name cn">李晓哲</h3>
+                                <h3 class="team-name en hide">Li Xiaozhe</h3>
+                                <p class="team-role cn">数字营销 | 电商专业</p>
+                                <p class="team-role en hide">Digital Marketing | E-commerce Major</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 页脚 -->
+                <footer>
+                    <div class="container">
+                        <div class="footer-content">
+                            <div class="footer-brand-section">
+                                <div class="footer-brand cn">非遗数创·跨境通途</div>
+                                <div class="footer-brand en hide">ICH Digital · Global Access</div>
+                                <p class="footer-desc cn">AI赋能全球非遗设计交易平台，让中国文化走向世界</p>
+                                <p class="footer-desc en hide">AI-powered global ICH design trading platform, bringing Chinese culture to the world</p>
+                            </div>
+                            <div class="footer-links-section">
+                                <h3 class="footer-title cn">快速链接</h3>
+                                <h3 class="footer-title en hide">Quick Links</h3>
+                                <ul class="footer-links">
+                                    <li><a href="#home" class="cn">首页</a><a href="#home" class="en hide">Home</a></li>
+                                    <li><a href="#about" class="cn">平台介绍</a><a href="#about" class="en hide">About</a></li>
+                                    <li><a href="#features" class="cn">核心优势</a><a href="#features" class="en hide">Advantages</a></li>
+                                    <li><a href="#products" class="cn">商品展示</a><a href="#products" class="en hide">Products</a></li>
+                                </ul>
+                            </div>
+                            <div class="footer-contact-section">
+                                <h3 class="footer-title cn">联系我们</h3>
+                                <h3 class="footer-title en hide">Contact Us</h3>
+                                <ul class="footer-links">
+                                    <li><span class="cn">邮箱：contact@ichdigital.com</span><span class="en hide">Email: contact@ichdigital.com</span></li>
+                                    <li><span class="cn">地址：中国·安阳</span><span class="en hide">Address: Anyang, China</span></li>
+                                    <li><span class="cn">三创赛参赛项目</span><span class="en hide">Three Innovation Competition Entry</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="footer-bottom">
+                            <p class="cn">© 2026 非遗数创跨境交易平台 版权所有 | 安阳工学院</p>
+                            <p class="en hide">© 2026 ICH Digital Cross-border Trading Platform. All Rights Reserved | Anyang Institute of Technology</p>
+                        </div>
+                    </div>
+                </footer>
+            `);
+        }
+    </script>
+
+    <!-- 核心功能脚本 -->
+    <script>
+        // 打开完善中页面的统一函数
+        function openConstructionPage() {
+            // 获取当前语言状态
+            const lang = document.documentElement.lang || 'zh-CN';
+            // 在当前窗口打开（替代新窗口，解决返回问题）
+            window.location.href = `${localStorage.getItem('mainPageUrl')}?construction=true&lang=${lang}`;
+        }
+
+        // 仅在主页面执行语言切换逻辑
+        if (!isUnderConstruction) {
+            // 获取语言切换按钮
+            const cnBtn = document.getElementById('cnBtn');
+            const enBtn = document.getElementById('enBtn');
+            
+            // 获取所有中英文元素
+            const cnElements = document.querySelectorAll('.cn');
+            const enElements = document.querySelectorAll('.en');
+            
+            // 中文切换
+            cnBtn.addEventListener('click', function() {
+                cnBtn.classList.add('active');
+                enBtn.classList.remove('active');
+                cnElements.forEach(el => el.classList.remove('hide'));
+                enElements.forEach(el => el.classList.add('hide'));
+                document.documentElement.lang = 'zh-CN';
+                // 更新本地存储的语言状态
+                localStorage.setItem('currentLang', 'zh-CN');
+            });
+            
+            // 英文切换
+            enBtn.addEventListener('click', function() {
+                enBtn.classList.add('active');
+                cnBtn.classList.remove('active');
+                enElements.forEach(el => el.classList.remove('hide'));
+                cnElements.forEach(el => el.classList.add('hide'));
+                document.documentElement.lang = 'en';
+                // 更新本地存储的语言状态
+                localStorage.setItem('currentLang', 'en');
+            });
+            
+            // 页面滚动平滑效果
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // 初始化语言状态
+            const savedLang = localStorage.getItem('currentLang') || 'zh-CN';
+            if (savedLang === 'en') {
+                enBtn.click();
+            } else {
+                cnBtn.click();
+            }
+        } else {
+            // 在完善中页面执行逻辑
+            // 获取语言参数
+            const lang = urlParams.get('lang') || 'zh-CN';
+            document.documentElement.lang = lang;
+            
+            // 切换多语言显示
+            const cnElements = document.querySelectorAll('.cn');
+            const enElements = document.querySelectorAll('.en');
+            
+            if (lang === 'en') {
+                cnElements.forEach(el => el.classList.add('hide'));
+                enElements.forEach(el => el.classList.remove('hide'));
+            } else {
+                enElements.forEach(el => el.classList.add('hide'));
+                cnElements.forEach(el => el.classList.remove('hide'));
+            }
+            
+            // 修复返回按钮功能（核心修复）
+            document.getElementById('backToMainBtn').addEventListener('click', function() {
+                // 回到主页面并保留语言状态
+                window.location.href = `${localStorage.getItem('mainPageUrl')}?lang=${lang}#products`;
+            });
+        }
+    </script>
+</body>
+</html>
